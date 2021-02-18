@@ -47,18 +47,20 @@ public class InMemoryUserRepository implements UserRepository {
         userList.sort(new Comparator<User>() {
             @Override
             public int compare(User o1, User o2) {
-                return o1.getName().compareTo(o2.getName());
+                int nameSort = o1.getName().compareTo(o2.getName());
+                if(nameSort == 0){
+                    return o1.getEmail().compareTo(o2.getEmail());
+                }
+                return nameSort;
             }
         });
+
         return userList;
     }
 
     @Override
     public User getByEmail(String email) {
         log.info("getByEmail {}", email);
-        for(User user : repository.values()){
-            if (user.getEmail().equals(email)) return user;
-        }
-        return null;
+        return repository.values().stream().filter(u -> u.getEmail().equals(email)).findFirst().get();
     }
 }
