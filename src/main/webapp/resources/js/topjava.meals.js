@@ -1,0 +1,1 @@
+const mealAjaxUrl = "/profile/meals"
