@@ -3,13 +3,13 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <html>
-<jsp:include page="fragments/headTag.jsp"/>
+<jsp:include page="../fragments/headTag.jsp"/>
 <body>
-<jsp:include page="fragments/bodyHeader.jsp"/>
+<jsp:include page="../fragments/bodyHeader.jsp"/>
 
 <section>
     <jsp:useBean id="meal" type="ru.javawebinar.topjava.model.Meal" scope="request"/>
-<%--    `meal.new` cause javax.el.ELException - bug tomcat --%>
+    <%--    `meal.new` cause javax.el.ELException - bug tomcat --%>
     <h3><spring:message code="${meal.isNew() ? 'meal.add' : 'meal.edit'}"/></h3>
     <hr>
     <form method="post" action="meals">
@@ -30,6 +30,6 @@
         <button onclick="window.history.back()" type="button"><spring:message code="common.cancel"/></button>
     </form>
 </section>
-<jsp:include page="fragments/footer.jsp"/>
+<jsp:include page="../fragments/footer.jsp"/>
 </body>
 </html>

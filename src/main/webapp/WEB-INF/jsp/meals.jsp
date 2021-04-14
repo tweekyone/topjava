@@ -56,11 +56,34 @@
                 </td>
                 <td>${meal.description}</td>
                 <td>${meal.calories}</td>
-                <td><a href="meals/update?id=${meal.id}"><spring:message code="common.update"/></a></td>
-                <td><a href="meals/delete?id=${meal.id}"><spring:message code="common.delete"/></a></td>
+                <td><a><span class="fa fa-pencil"></span></a></td>
+                <td><a onclick="deleteRow(${meal.id})"><span class="fa fa-remove"></span></a></td>
             </tr>
         </c:forEach>
     </table>
+    <div class="modal fade" tabindex="-1" id="editRow">
+        <div class="modal-dialog">
+            <form id="detailsForm">
+                <input type="hidden" name="id" value="${meal.id}">
+                <dl>
+                    <dt><spring:message code="meal.dateTime"/>:</dt>
+                    <dd><input type="datetime-local" value="${meal.dateTime}" name="dateTime" required></dd>
+                </dl>
+                <dl>
+                    <dt><spring:message code="meal.description"/>:</dt>
+                    <dd><input type="text" value="${meal.description}" size=40 name="description" required></dd>
+                </dl>
+                <dl>
+                    <dt><spring:message code="meal.calories"/>:</dt>
+                    <dd><input type="number" value="${meal.calories}" name="calories" required></dd>
+                </dl>
+            </form>
+            <button type=button class="btn btn-secondary" data-dismiss="modal" onclick="closeNoty()">
+                <spring:message code="common.cancel"/>
+            </button>
+            <button type=button class="btn btn-primary" onclick="save()"><spring:message code="common.save"/></button>
+        </div>
+    </div>
 </section>
 <jsp:include page="fragments/footer.jsp"/>
 </body>
