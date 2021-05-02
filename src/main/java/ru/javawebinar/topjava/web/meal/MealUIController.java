@@ -27,6 +27,12 @@ public class MealUIController extends AbstractMealController {
     }
 
     @Override
+    @GetMapping("/{id}")
+    public Meal get(@PathVariable int id) {
+        return super.get(id);
+    }
+
+    @Override
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {
@@ -45,7 +51,7 @@ public class MealUIController extends AbstractMealController {
         if(meal.isNew()){
             super.create(meal);
         } else {
-            super.update(meal, SecurityUtil.authUserId());
+            super.update(meal, meal.getId());
         }
         return ResponseEntity.ok().build();
     }
