@@ -28,7 +28,13 @@ $(function () {
             "info": true,
             "columns": [
                 {
-                    "data": "dateTime"
+                    "data": "dateTime",
+                    "render": function (date, type, row) {
+                        if(type === "display"){
+                            return date.replace('T', ' ')
+                        }
+                        return date
+                    }
                 },
                 {
                     "data": "description"
@@ -53,9 +59,9 @@ $(function () {
                     "desc"
                 ]
             ],
-            // "createdRow": function (row, data, dataIndex) {
-            //     $(row).addClass()
-            // }
+            "createdRow": function (row, data, dataIndex) {
+                $(row).attr("data-userenabled", true);
+            }
         })
     );
 });
