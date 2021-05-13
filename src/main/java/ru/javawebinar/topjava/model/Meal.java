@@ -52,7 +52,8 @@ public class Meal extends AbstractBaseEntity {
     @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonBackReference
-    @NotNull(groups = View.Persist.class) //валидация при сохранении и обновлении для Hibernate, исключается валидация в контроллерах
+    //валидация при сохранении и обновлении для Hibernate, исключается валидация в контроллерах, настраивается в spring-db.xml
+    @NotNull(groups = View.Persist.class)
     private User user;
 
     public Meal() {
