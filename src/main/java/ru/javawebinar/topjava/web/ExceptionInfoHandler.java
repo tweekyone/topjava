@@ -21,6 +21,8 @@ import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.net.BindException;
+
 import static ru.javawebinar.topjava.util.exception.ErrorType.*;
 
 @RestControllerAdvice(annotations = RestController.class)
@@ -48,8 +50,8 @@ public class ExceptionInfoHandler {
     }
 
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ErrorInfo notValid(HttpServletRequest req, MethodArgumentNotValidException e){
+    @ExceptionHandler(BindException.class)
+    public ErrorInfo notValid(HttpServletRequest req, BindException e){
         return logAndGetErrorInfo(req, e, true, VALIDATION_ERROR);
     }
 
